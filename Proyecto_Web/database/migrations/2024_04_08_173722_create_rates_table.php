@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->id();
+            $table->integer('score')->comment('Calificación');
+            $table->string('comment')->comment('Comentario');
+            $table->unsignedBigInteger('product_id')->comment('ID del producto');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('user_id')->comment('ID del usuario');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

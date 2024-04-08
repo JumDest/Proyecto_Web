@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('product_brands', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_id')->comment('ID del producto');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('brand_id')->comment('ID de la marca');
+            $table->foreign('brand_id')->references('id')->on('brands');
             $table->timestamps();
         });
     }

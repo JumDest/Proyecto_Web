@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('shop_cars', function (Blueprint $table) {
             $table->id();
+            $table->float('total')->comment('Total de la compra');
+            $table->unsignedBigInteger('user_id')->comment('ID del usuario');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
