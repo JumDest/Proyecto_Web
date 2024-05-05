@@ -3,62 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ShopCarDetail;
 
 class ShopCarsDetailsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $shopCarsDetails = ShopCarDetail::all();
+        return view('shopCarsDetails.index', compact('shopCarsDetails'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $shopCarDetail = new ShopCarDetail();
+        $shopCarDetail->quantityShopCar = $request->quantityShopCar;
+        $shopCarDetail->shop_car_id = $request->shop_car_id;
+        $shopCarDetail->product_id = $request->product_id;
+        $shopCarDetail->save();
+        return redirect()->route('shopCarsDetails.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $shopCarsDetails = ShopCarDetail::find($id);
+        return view('shopCarsDetails.edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $shopCarDetail = ShopCarDetail::find($id);
+        $shopCarDetail->quantityShopCar = $request->quantityShopCar;
+        $shopCarDetail->shop_car_id = $request->shop_car_id;
+        $shopCarDetail->product_id = $request->product_id;
+        $shopCarDetail->save();
+        return redirect()->route('shopCarsDetails.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $shopCarDetail = ShopCarDetail::find($id);
+        $shopCarDetail->delete();
+        return redirect()->route('shopCarsDetails.index');
     }
 }

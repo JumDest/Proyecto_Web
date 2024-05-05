@@ -3,62 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ShopCar;
 
 class ShopCarsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $shopCars = ShopCar::all();
+        return view('shopCars.index', compact('shopCars'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $shopCar = new ShopCar();
+        $shopCar->total = $request->total;
+        $shopCar->user_id = $request->user_id;
+        $shopCar->save();
+        return redirect()->route('shopCars.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $shopCars = ShopCar::find($id);
+        return view('shopCars.edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $shopCar = ShopCar::find($id);
+        $shopCar->total = $request->total;
+        $shopCar->user_id = $request->user_id;
+        $shopCar->save();
+        return redirect()->route('shopCars.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $shopCar = ShopCar::find($id);
+        $shopCar->delete();
+        return redirect()->route('shopCars.index');
     }
 }

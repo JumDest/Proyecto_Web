@@ -3,62 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProductBrand;
 
 class ProductBrandsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        $productBrands = ProductBrand::all();
+        return view('productBrands.index', compact('productBrands'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $productBrand = new ProductBrand();
+        $productBrand->product_id = $request->product_id;
+        $productBrand->brand_id = $request->brand_id;
+        $productBrand->save();
+        return redirect()->route('productBrands.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $productBrands = ProductBrand::find($id);
+        return view('productBrands.edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $productBrand = ProductBrand::find($id);
+        $productBrand->product_id = $request->product_id;
+        $productBrand->brand_id = $request->brand_id;
+        $productBrand->save();
+        return redirect()->route('productBrands.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $productBrand = ProductBrand::find($id);
+        $productBrand->delete();
+        return redirect()->route('productBrands.index');
     }
 }

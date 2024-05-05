@@ -3,62 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\OrderDetail;
 
 class OrderDetailsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $orderDetails = OrderDetail::all();
+        return view('orderDetails.index', compact('orderDetails'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $orderDetail = new OrderDetail();
+        $orderDetail->quantityShopCar = $request->quantityShopCar;
+        $orderDetail->shop_car_id = $request->shop_car_id;
+        $orderDetail->product_id = $request->product_id;
+        $orderDetail->save();
+        return redirect()->route('orderDetails.index');
+    
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $orderDetails = OrderDetail::find($id);
+        return view('orderDetails.edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+ 
     public function update(Request $request, string $id)
     {
-        //
+        $orderDetail = OrderDetail::find($id);
+        $orderDetail->quantityShopCar = $request->quantityShopCar;
+        $orderDetail->shop_car_id = $request->shop_car_id;
+        $orderDetail->product_id = $request->product_id;
+        $orderDetail->save();
+        return redirect()->route('orderDetails.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        //
+        $orderDetail = OrderDetail::find($id);
+        $orderDetail->delete();
+        return redirect()->route('orderDetails.index');
     }
 }
