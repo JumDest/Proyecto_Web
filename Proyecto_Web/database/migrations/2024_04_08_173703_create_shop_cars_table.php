@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->float('total')->comment('Total de la compra');
             $table->unsignedBigInteger('user_id')->comment('ID del usuario');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('user_clients');
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\ProductsBrandsController;
+use App\Http\Controllers\ProductBrandsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RatesController;
 use App\Http\Controllers\ShopCarsController;
@@ -40,11 +40,11 @@ Route::delete('/orders/{id}', [OrdersController::class, 'destroy'])->name('order
 Route::put('/orders/{id}', [OrdersController::class, 'update'])->name('orders.update');
 Route::get('/orders/{id}/edit', [OrdersController::class, 'edit'])->name('orders.edit');
 
-Route::get('/productsBrands', [ProductsBrandsController::class, 'index'])->name('productsBrands.index');
-Route::post('/productsBrands', [ProductsBrandsController::class, 'store'])->name('productsBrands.store');
-Route::delete('/productsBrands/{id}', [ProductsBrandsController::class, 'destroy'])->name('productsBrands.destroy');
-Route::put('/productsBrands/{id}', [ProductsBrandsController::class, 'update'])->name('productsBrands.update');
-Route::get('/productsBrands/{id}/edit', [ProductsBrandsController::class, 'edit'])->name('productsBrands.edit');
+Route::get('/productsBrands', [ProductBrandsController::class, 'index'])->name('productsBrands.index');
+Route::post('/productsBrands', [ProductBrandsController::class, 'store'])->name('productsBrands.store');
+Route::delete('/productsBrands/{id}', [ProductBrandsController::class, 'destroy'])->name('productsBrands.destroy');
+Route::put('/productsBrands/{id}', [ProductBrandsController::class, 'update'])->name('productsBrands.update');
+Route::get('/productsBrands/{id}/edit', [ProductBrandsController::class, 'edit'])->name('productsBrands.edit');
 
 Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
 Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
