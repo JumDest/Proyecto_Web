@@ -13,7 +13,7 @@ use App\Http\Controllers\ShopCarsDetailsController;
 use App\Http\Controllers\UserClientsDetailsController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
