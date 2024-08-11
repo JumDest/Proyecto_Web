@@ -1,0 +1,11 @@
+.header {
+    background-image: url('https://via.placeholder.com/1500x500');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+}
+.products .card {
+    margin-bottom: 30px;
+}

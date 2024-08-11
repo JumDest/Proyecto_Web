@@ -16,6 +16,7 @@ Route::get('/', function () {
     return view('principal');
 })->name('principal');
 
+
 Route::get('/brands/create', [BrandsController::class, 'create'])->name('brands.create');
 Route::get('/brands', [BrandsController::class, 'index'])->name('brands.index');
 Route::post('/brands', [BrandsController::class, 'store'])->name('brands.store');
