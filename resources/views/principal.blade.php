@@ -59,7 +59,7 @@
 						<div class="card">
 							<img src="https://www.trustedreviews.com/wp-content/uploads/sites/54/2017/09/Acer_Nitro_5_04.jpg" class="card-img-top" alt="Asus Nitro 5">
 							<div class="card-body">
-								<h5 class="card-title">Asus Nitro 5</h5>
+								<h5 class="card-title">Acer Nitro 5</h5>
 								<p class="card-text">El Acer Nitro 5 es una laptop gaming de 15.6 pulgadas con procesadores Intel o AMD y gráficas NVIDIA, ideal para gamers que buscan potencia a buen precio. Además, ofrece un sistema de refrigeración eficiente y un teclado retroiluminado para una experiencia de juego cómoda y fluida. Su diseño lo hacen para juegos y para tareas diarias.</p>
 								<a href="#" class="btn btn-primary">Comprar</a>
 							</div>
