@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\Product;
 
 class BrandsController extends Controller
 {
     
     public function index()
     {
-        $brands = Brand::all();
-        return view('brands.index', compact('brands')); 
+        $brands = Brand::all(); // Obtener todas las marcas
+        $products = Product::all(); // Obtener todos los productos
+        return view('products.index', compact('products', 'brands'));
     }
+
 
     
     public function store(Request $request)
@@ -52,4 +55,12 @@ class BrandsController extends Controller
         $brand->delete();
         return redirect()->route('brands.index');
     }
+
+    public function filterByBrand($brandId)
+    {
+        $brands = Brand::all(); // Obtener todas las marcas
+        $products = Product::where('brand_id', $brandId)->get(); // Obtener productos por marca
+        return view('products.index', compact('products', 'brands'));
+    }
 }
+

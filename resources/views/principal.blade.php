@@ -34,7 +34,7 @@
 							<a class="nav-link" href="#">Inicio</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Productos</a>
+							<a class="nav-link" href="/products">Productos</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ asset('HTML/mensaje.html') }}">Contacto</a>

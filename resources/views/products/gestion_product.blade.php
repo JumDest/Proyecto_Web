@@ -41,7 +41,7 @@
     </nav>
     <div class="container mt-5">
         <h1>Gestionar Productos</h1>
-        <form action="{{ route('products.store') }}" method="POST">
+        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre del Producto</label>
@@ -66,6 +66,20 @@
                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                     @endforeach
                 </select>
+
+                <label for="category_id" class="form-label mt-3">Categoría del Producto</label>
+                <select class="form-select" id="category_id" name="category_id" required>
+                    <option value="">Selecciona una categoría</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Imagen del Producto</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                </div>
+
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
