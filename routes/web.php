@@ -12,9 +12,7 @@ use App\Http\Controllers\ShopCarsController;
 use App\Http\Controllers\ShopCarsDetailsController;
 use App\Http\Controllers\UserClientsDetailsController;
 
-Route::get('/', function () {
-    return view('principal');
-})->name('principal');
+Route::get('/', [ProductsController::class, 'home'])->name('home');
 
 
 Route::get('/brands/create', [BrandsController::class, 'create'])->name('brands.create');

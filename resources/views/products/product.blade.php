@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Page</title>
+    <title>{{ $product->name ?? 'Producto' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 200px; /* Ajusta la altura según tus necesidades */
+            object-fit: cover; /* Asegura que la imagen cubra el área especificada */
+        }
+    </style>
 </head>
 <body>
     
+<!-- Barra de Navegación -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">JD Components</a>
@@ -17,33 +25,33 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="welcome">Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="/products">Productos</a>
                 </li>
-                
+
                 <!-- Menú desplegable de Categorías -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categorías
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Categoría 1</a></li>
-                        <li><a class="dropdown-item" href="#">Categoría 2</a></li>
-                        <li><a class="dropdown-item" href="#">Categoría 3</a></li>
+                        @foreach ($categories as $category)
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', $category->id) }}">{{ $category->name }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
-                
+
                 <!-- Menú desplegable de Marcas -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Marcas
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Marca A</a></li>
-                        <li><a class="dropdown-item" href="#">Marca B</a></li>
-                        <li><a class="dropdown-item" href="#">Marca C</a></li>
+                        @foreach ($brands as $brand)
+                            <li><a class="dropdown-item" href="{{ route('products.byBrand', $brand->id) }}">{{ $brand->name }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
 
@@ -51,109 +59,69 @@
                     <a class="nav-link" href="{{ asset('HTML/mensaje.html') }}">Contacto</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
         </div>
     </div>
 </nav>
     
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6">
-                <!-- Carousel -->
-                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="\img\product01.png" class="d-block w-100" alt="Product Image 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="\img\product02.png" class="d-block w-100" alt="Product Image 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="\img\product03.png" class="d-block w-100" alt="Product Image 3">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="col-md-6">
-                <!-- Product Details -->
-                <h1>Product Name</h1>
-                <p class="text-muted">Product Category</p>
-                <h2>$99.99</h2>
-                <button class="btn btn-primary">Add to Cart</button>  
-            </div>
-        </div>
-        <hr>
+<div class="container mt-5">
+    @if($product)
+    <div class="row">
         <div class="col-md-6">
+            <!-- Product Image -->
+            @if($product->image_url)
+                <img src="{{ asset('storage/' . $product->image_url) }}" class="img-fluid" alt="{{ $product->name }}">
+            @else
+                <img src="https://via.placeholder.com/500x500" class="img-fluid" alt="{{ $product->name }}">
+            @endif
+        </div>
+        
+        <div class="col-md-6">
+            <!-- Product Details -->
+            <h1>{{ $product->name }}</h1>
+            <p class="text-muted">{{ $product->category->name ?? 'Categoría no disponible' }}</p>
+            <h2>${{ $product->price }}</h2>
+            <button class="btn btn-primary">Add to Cart</button>  
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
             <!-- Product Specifications -->
             <h3>Especificaciones del Producto</h3>
             <ul>
-                <li>Especificación 1</li>
-                <li>Especificación 2</li>
-                <li>Especificación 3</li>
-                <li>Especificación 4</li>
+                @foreach(explode("\n", $product->specs) as $spec)
+                    <li>{{ $spec }}</li>
+                @endforeach
             </ul>
         </div>
-        
-        <hr>
-        <!-- Similar Products -->
-        <h3>Similar Products</h3>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="similar1.jpg" class="card-img-top" alt="Similar Product 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Similar Product 1</h5>
-                        <p class="card-text">$49.99</p>
-                        <a href="#" class="btn btn-primary">View Product</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="similar2.jpg" class="card-img-top" alt="Similar Product 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Similar Product 2</h5>
-                        <p class="card-text">$59.99</p>
-                        <a href="#" class="btn btn-primary">View Product</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="similar3.jpg" class="card-img-top" alt="Similar Product 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Similar Product 3</h5>
-                        <p class="card-text">$69.99</p>
-                        <a href="#" class="btn btn-primary">View Product</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="similar4.jpg" class="card-img-top" alt="Similar Product 4">
-                    <div class="card-body">
-                        <h5 class="card-title">Similar Product 4</h5>
-                        <p class="card-text">$79.99</p>
-                        <a href="#" class="btn btn-primary">View Product</a>
-                    </div>
+    </div>
+    
+    <hr>
+    <!-- Productos Similares -->
+    <h3>Productos Similares</h3>
+    <div class="row">
+        @foreach($similarProducts as $similarProduct)
+        <div class="col-md-3">
+            <div class="card">
+                @if($similarProduct->image_url)
+                    <img src="{{ asset('storage/' . $similarProduct->image_url) }}" class="card-img-top" alt="{{ $similarProduct->name }}">
+                @else
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="{{ $similarProduct->name }}">
+                @endif
+                <div class="card-body">
+                    <h5 class="card-title">{{ $similarProduct->name }}</h5>
+                    <p class="card-text">${{ $similarProduct->price }}</p>
+                    <a href="{{ route('products.show', $similarProduct->id) }}" class="btn btn-primary">Ver Producto</a>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
+    @else
+    <p>Producto no encontrado.</p>
+    @endif
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-Gns3yTYaTG8B7N6FRwDG2vcpWseOxO1XWhq9/Ihv2+9u+Y/j5OfJ2tXKP3qf/ot2" crossorigin="anonymous"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

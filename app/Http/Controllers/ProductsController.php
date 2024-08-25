@@ -20,13 +20,25 @@ class ProductsController extends Controller
     public function show(string $id)
     {
         $product = Product::find($id);
-
+        
         if (!$product) {
             return redirect()->route('products.index')->with('error', 'Producto no encontrado.');
         }
-
-        return view('products.one_product', compact('product'));
+        
+        // Obtener productos similares de la misma categoría
+        $similarProducts = Product::where('category_id', $product->category_id)
+                                    ->where('id', '!=', $id) // Excluir el producto actual
+                                    ->take(4) // Limitar la cantidad de productos similares
+                                    ->get();
+        
+        // Obtener todas las categorías y marcas para el menú de navegación
+        $categories = Category::all();
+        $brands = Brand::all();
+        
+        return view('products.product', compact('product', 'similarProducts', 'categories', 'brands'));
     }
+    
+
 
     public function store(Request $request)
     {
@@ -150,4 +162,17 @@ class ProductsController extends Controller
     // Retorna la vista con los productos filtrados
     return view('products.index', compact('products', 'brands', 'categories'));
 }
+public function home()
+{
+    $featuredProducts = Product::take(3)->get();
+    $categories = Category::all();
+    $brands = Brand::all();
+
+    return view('principal', compact('featuredProducts', 'categories', 'brands'));
 }
+
+
+
+}
+
+

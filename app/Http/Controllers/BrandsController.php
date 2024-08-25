@@ -23,7 +23,7 @@ class BrandsController extends Controller
         $brand = new Brand();
         $brand->name = $request->name;
         $brand->save();
-        return redirect()->route('brands.index');
+        return redirect()->route('products.index');
     }
 
     public function create()
