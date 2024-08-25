@@ -10,7 +10,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RatesController;
 use App\Http\Controllers\ShopCarsController;
 use App\Http\Controllers\ShopCarsDetailsController;
-use App\Http\Controllers\UserClientsDetailsController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [ProductsController::class, 'home'])->name('home');
 

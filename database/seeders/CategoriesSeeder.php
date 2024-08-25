@@ -13,14 +13,16 @@ class CategoriesSeeder extends Seeder
      */
     public function run(): void
     {
-        // $categories = [
-        //     ['name' => 'Smartphones'],
-        //     ['name' => 'Tablets'],
-        //     ['name' => 'Laptops'],
-        //     ['name' => 'Desktops'],
-        // ];
-        $category = new Category();
-        $category->name = 'Smartphones';
-        $category->save();
+        $categories = [
+            ['name' => 'Tablets'],
+            ['name' => 'Notebooks'],
+            ['name' => 'Smartwatches'],
+            ['name' => 'Acessórios'],    
+        ];
+
+        foreach ($categories as $category) {
+            Category::create($category);
+        }
     }
 }
+

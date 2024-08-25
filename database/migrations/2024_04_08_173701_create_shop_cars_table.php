@@ -11,7 +11,7 @@ class CreateShopCarsTable extends Migration
         Schema::create('shop_cars', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id'); // Asumimos que estás usando un campo user_id
-            $table->decimal('total', 10, 2)->default(0);
+            $table->float('total', 8, 2);
             $table->timestamps();
 
             // Agrega la clave foránea si existe una tabla de usuarios

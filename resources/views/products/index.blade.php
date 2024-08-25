@@ -79,13 +79,7 @@
                     <h5 class="card-title">{{ $product->name }}</h5>
                     <p class="card-text">{{ $product->description }}</p>
                     <p class="card-text"><strong>Precio:</strong> ${{ number_format($product->price, 2) }}</p>
-                    <!-- Formulario para añadir producto al carrito -->
-                    <form action="{{ route('shopCars.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <input type="hidden" name="quantityShopCar" value="1">
-                        <button type="submit" class="btn btn-primary">Añadir al carrito</button>
-                    </form>
+                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver</a>
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('date')->comment('Fecha del pedido');
             $table->string('status')->comment('Estado del pedido');
             $table->unsignedBigInteger('user_id')->comment('ID del usuario');
-            $table->foreign('user_id')->references('id')->on('user_clients');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

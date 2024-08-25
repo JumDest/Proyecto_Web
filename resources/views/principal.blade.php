@@ -100,7 +100,7 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">{{ $product->description }}</p>
                             <p class="card-text"><strong>Precio:</strong> ${{ $product->price }}</p>
-                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Comprar</a>
+                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver</a>
                         </div>
                     </div>
                 </div>

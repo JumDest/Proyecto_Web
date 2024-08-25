@@ -14,15 +14,16 @@ class BrandsSeeder extends Seeder
     
     public function run(): void
     {
-        // $brands = [
-        //     ['name' => 'Apple'],
-        //     ['name' => 'Samsung'],
-        //     ['name' => 'Huawei'],
-        //     ['name' => 'Xiaomi'],
-        // ];
-        $barnd = new Brand();
-        $barnd->name = 'Apple';
-        $barnd->save();
+        $brands = [
+            ['name' => 'Apple'],
+            ['name' => 'Samsung'],
+            ['name' => 'Huawei'],
+            ['name' => 'Xiaomi'],
+        ];
+
+        foreach ($brands as $brand) {
+            Brand::create($brand);
+        }
     }
 }
 

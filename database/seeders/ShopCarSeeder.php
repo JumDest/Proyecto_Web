@@ -13,14 +13,15 @@ class ShopCarSeeder extends Seeder
      */
     public function run(): void
     {
-        // $shopCars = [
-        //     ['user_id' => 1],
-        //     ['user_id' => 2],
-        // ];
+        $shopCars = [
+            ['user_id' => 1, 'total' => 100.00],
+            ['user_id' => 2, 'total' => 200.00],
+            ['user_id' => 3, 'total' => 300.00],
+            ['user_id' => 2, 'total' => 400.00],
+        ];
 
-        $shopCar = new ShopCar();
-        $shopCar->total= 2500;
-        $shopCar->user_id = 1;
-        $shopCar->save();
+        foreach ($shopCars as $shopCar) {
+            ShopCar::create($shopCar);
+        }
     }
 }

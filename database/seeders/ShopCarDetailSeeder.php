@@ -13,17 +13,15 @@ class ShopCarDetailSeeder extends Seeder
      */
     public function run(): void
     {
-        // $shopCarDetails = [
-        //     ['shop_car_id' => 1, 'product_id' => 1, 'quantity' => 2],
-        //     ['shop_car_id' => 1, 'product_id' => 2, 'quantity' => 1],
-        //     ['shop_car_id' => 2, 'product_id' => 1, 'quantity' => 1],
-        //     ['shop_car_id' => 2, 'product_id' => 2, 'quantity' => 3],
-        // ];
+        $shopCarDetails = [
+            ['shop_car_id' => 1, 'product_id' => 1, 'quantityShopCar' => 1],
+            ['shop_car_id' => 2, 'product_id' => 2, 'quantityShopCar' => 2],
+            ['shop_car_id' => 3, 'product_id' => 3, 'quantityShopCar' => 3],
+            ['shop_car_id' => 4, 'product_id' => 4, 'quantityShopCar' => 4],
+        ];
 
-        $shopCarDetail = new ShopCarDetail();
-        $shopCarDetail->quantityShopCar = 2;
-        $shopCarDetail->shop_car_id = 1;
-        $shopCarDetail->product_id = 1;
-        $shopCarDetail->save();
+        foreach ($shopCarDetails as $shopCarDetail) {
+            ShopCarDetail::create($shopCarDetail);
+        }
     }
 }

@@ -13,15 +13,17 @@ class ProductBrandSeeder extends Seeder
      */
     public function run(): void
     {
-        // $brands = [
-        //     ['name' => 'Apple'],
-        //     ['name' => 'Samsung'],
-        //     ['name' => 'Huawei'],
-        //     ['name' => 'Xiaomi'],
-        // ];
-        $productbrand = new ProductBrand();
-        $productbrand-> product_id = 1;
-        $productbrand-> brand_id = 1;
-        $productbrand->save();
+        
+        $productbrands = [
+            ['product_id' => 1, 'brand_id' => 1],
+            ['product_id' => 2, 'brand_id' => 2],
+            ['product_id' => 3, 'brand_id' => 3],
+            ['product_id' => 4, 'brand_id' => 4],
+        ];
+
+        foreach ($productbrands as $productbrand) {
+            ProductBrand::create($productbrand);
+        }
     }
+        
 }
