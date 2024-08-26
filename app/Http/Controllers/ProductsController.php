@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Brand;
-use App\Models\Category; // Asegúrate de importar el modelo Category
+use App\Models\Category; 
 
 class ProductsController extends Controller
 {

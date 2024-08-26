@@ -36,3 +36,10 @@ Route::resource('shopCars', ShopCarsController::class);
 Route::get('/productos/por-marca/{brandId}', [ProductsController::class, 'filterByBrand'])->name('products.filterByBrand');
 Route::get('/products/brand/{brandId}', [ProductsController::class, 'productsByBrand'])->name('products.byBrand');
 Route::get('/productos/categoria/{id}', [ProductsController::class, 'filterByCategory'])->name('products.byCategory');
+
+
+Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
+Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
+Route::get('/categories/{id}/edit', [CategoriesController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
