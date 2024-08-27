@@ -13,7 +13,7 @@ class BrandsController extends Controller
     {
         $brands = Brand::all(); // Obtener todas las marcas
         $products = Product::all(); // Obtener todos los productos
-        return view('products.index', compact('products', 'brands'));
+        return view('brands.index', compact('products', 'brands'));
     }
 
 
