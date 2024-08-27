@@ -1,6 +1,8 @@
 Para correr los seeders con las imagenes se debe correr el siguiente comando:
 "php artisan storage:link"
 
+Link del documento: https://docs.google.com/document/d/1xQQMmP7svPKdEngs5S4lRKX1VyloIeTWcRMrQVccjVk/edit?usp=sharing
+
 Juan Manuel Loaiza García -
 David Moreno Gaviria
 
