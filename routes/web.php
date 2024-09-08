@@ -43,3 +43,10 @@ Route::post('/categories', [CategoriesController::class, 'store'])->name('catego
 Route::get('/categories/{id}/edit', [CategoriesController::class, 'edit'])->name('categories.edit');
 Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
 Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
