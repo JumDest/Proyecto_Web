@@ -7,7 +7,10 @@
 		<title>JD Components</title>
 		<link rel="stylesheet" href="/css/styles.css">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-		<style>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js desde CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> <!-- jsPDF desde CDN -->
+        <script src="{{ asset('js/reporte.js') }}" defer></script> <!-- Vincula el archivo JS -->
+        <style>
 			.header {
 				background-image: url('https://assets2.razerzone.com/images/og-image/1200x630_razerstore-london-page_OG.jpg');
 				background-size: cover;
@@ -88,7 +91,7 @@
 				</div>
 			</div>
 		</section>
-	
+
 		<section class="contact py-5 bg-light">
 			<div class="container">
 				<h2 class="text-center mb-4">Contacto</h2>
@@ -109,15 +112,24 @@
 				</form>
 			</div>
 		</section>
-	
+        <section>
+            <h2>Generar reporte de portátiles por marca</h2>
+
+            <!-- Botón para generar el reporte en PDF -->
+            <button id="boton-portatiles" class="btn btn-primary">Generar PDF</button>
+
+            <!-- Canvas para el gráfico -->
+            <canvas id="graficoPortatiles" width="400" height="200"></canvas>
+        </section>
+
 		<footer class="text-center py-4">
 			<div class="container">
 				<p>&copy; 2024 JD Components. Todos los derechos reservados ©.</p>
 			</div>
 		</footer>
-	
+
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 		<script src="{{ asset('js/mensaje.js') }}" defer></script>
 	</body>
 </html>
-		
+

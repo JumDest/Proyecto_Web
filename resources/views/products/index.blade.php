@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Productos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.6.0/dist/jspdf.umd.min.js"></script>
+    <script src="{{ asset('js/reporte.js') }}" defer></script>
     <style>
         .img-size {
             width: 415px;
@@ -14,7 +17,7 @@
     </style>
 </head>
 <body>
-    
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="/">JD Components</a>
@@ -29,7 +32,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Productos</a>
                 </li>
-                
+
                 <!-- Menú desplegable de Categorías -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,7 +45,7 @@
                     </ul>
                 </li>
 
-                
+
                 <!-- Menú desplegable de Marcas -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,7 +69,7 @@
         </div>
     </div>
 </nav>
-    
+
 <!-- Vista de productos -->
 <div class="container mt-5">
     <h1>Lista de Productos</h1>
@@ -86,6 +89,12 @@
     @endforeach
     </div>
 </div>
+    <button onclick="window.location.href='{{ route('reporte.generate') }}'">PDF Productos</button>
+
+    <h1>Contar Portátiles HP</h1>
+    <button id="generateReport">Contar Portátiles HP</button>
+    <p id="hpCount"></p>
+    <canvas id="productChart" width="400" height="200"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
