@@ -89,12 +89,15 @@
     @endforeach
     </div>
 </div>
-    <button onclick="window.location.href='{{ route('reporte.generate') }}'">PDF Productos</button>
-
-    <h1>Contar Portátiles HP</h1>
-    <button id="generateReport">Contar Portátiles HP</button>
-    <p id="hpCount"></p>
-    <canvas id="productChart" width="400" height="200"></canvas>
+<center>
+    <div class="column">
+        <h1>Generar archivo PDF y Contar Portátiles HP </h1><br>
+        <button class='btn btn-primary' onclick="window.location.href='{{ route('reporte.generate') }}'">PDF Productos</button>
+        <button class='btn btn-primary' id="generateReport">Contar Portátiles HP</button>
+        <p id="hpCount"></p>
+        <canvas id="productChart" width="400" height="200"></canvas>
+    </div>
+</center>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
