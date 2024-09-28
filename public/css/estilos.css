@@ -1,0 +1,31 @@
+.user-avatar {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 8px;
+}
+
+.header {
+    background-image: url('https://assets2.razerzone.com/images/og-image/1200x630_razerstore-london-page_OG.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px; /* Ajusta la altura según tus necesidades */
+    object-fit: cover; /* Asegura que la imagen cubra el área especificada */
+}
+
+.products .card {
+    margin-bottom: 30px;
+}
+.products .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+}

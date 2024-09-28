@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Categorías</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -27,13 +28,28 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('categories.index') }}">Categorías</a>
                     </li>
+                    @auth
+                        <li class="nav-item dropdown d-flex align-items-center">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('img/avatar.png') }}" alt="Avatar" class="user-avatar">
+                                <span class="me-2">{{ Auth::user()->name }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="container mt-5">
-        <h1>Gestionar Categorías</h1>
+        <h1 class="mb-4">Gestionar Categorías</h1>
 
         <!-- Formulario para agregar una nueva categoría -->
         <div class="card mb-4">

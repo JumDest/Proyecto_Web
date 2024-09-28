@@ -8,14 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.6.0/dist/jspdf.umd.min.js"></script>
     <script src="{{ asset('js/reporte.js') }}" defer></script>
-    <style>
-        .img-size {
-            width: 415px;
-            height: 200px;
-            object-fit: cover; /* Mantiene la proporción y cubre el área especificada */
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}"></head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -61,6 +54,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ asset('HTML/mensaje.html') }}">Contacto</a>
                 </li>
+
+                @auth
+                    <li class="nav-item dropdown d-flex align-items-center">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ asset('img/avatar.png') }}" alt="Avatar" class="user-avatar">
+                            <span>{{ Auth::user()->name }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
+                    </li>
+                @endauth
             </ul>
             <!-- <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">

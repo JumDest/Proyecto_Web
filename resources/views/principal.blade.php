@@ -6,24 +6,7 @@
     <title>JD Components</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        .header {
-            background-image: url('https://assets2.razerzone.com/images/og-image/1200x630_razerstore-london-page_OG.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 100px 0;
-        }
-        .products .card {
-            margin-bottom: 30px;
-        }
-        .products .card-img-top {
-            width: 100%;
-            height: 200px;
-            object-fit: cover; /* Para mantener la relación de aspecto de la imagen */
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 </head>
 <body>
 
@@ -70,6 +53,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ asset('HTML/mensaje.html') }}">Contacto</a>
                     </li>
+
+                    @auth
+                    <li class="nav-item dropdown d-flex align-items-center">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ asset('img/avatar.png') }}" alt="Avatar" class="user-avatar">
+                            <span>{{ Auth::user()->name }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
+                    </li>
+                @endauth
                 </ul>
             </div>
         </div>
@@ -140,5 +139,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="{{ asset('js/mensaje.js') }}" defer></script>
+    <script src="estilos.css"></script>
 </body>
 </html>
