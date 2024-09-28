@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Rate extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['score', 'product_id', 'user_id']; // Cambia 'rating' a 'score'
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
+

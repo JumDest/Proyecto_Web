@@ -8,7 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.6.0/dist/jspdf.umd.min.js"></script>
     <script src="{{ asset('js/reporte.js') }}" defer></script>
-    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}"></head>
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
+</head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -37,7 +38,6 @@
                         @endforeach
                     </ul>
                 </li>
-
 
                 <!-- Menú desplegable de Marcas -->
                 <li class="nav-item dropdown">
@@ -71,10 +71,6 @@
                     </li>
                 @endauth
             </ul>
-            <!-- <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form> -->
         </div>
     </div>
 </nav>
@@ -83,19 +79,32 @@
 <div class="container mt-5">
     <h1>Lista de Productos</h1>
     <div class="row">
-    @foreach ($products as $product)
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="{{ $product->image_url ? asset('storage/' . $product->image_url) : 'default-image.jpg' }}" class="card-img-top img-size" alt="{{ $product->name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $product->name }}</h5>
-                    <p class="card-text">{{ $product->description }}</p>
-                    <p class="card-text"><strong>Precio:</strong> ${{ number_format($product->price, 2) }}</p>
-                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver</a>
+        @foreach ($products as $product)
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ $product->image_url ? asset('storage/' . $product->image_url) : 'default-image.jpg' }}" class="card-img-top img-size" alt="{{ $product->name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $product->name }}</h5>
+                        <p class="card-text">{{ $product->description }}</p>
+                        <p class="card-text"><strong>Precio:</strong> ${{ number_format($product->price, 2) }}</p>
+
+                        <!-- Mostrar calificaciones -->
+                        <p class="card-text"><strong>Calificaciones:</strong>
+                            @if($product->rates->count() > 0)
+                                @php
+                                    $averageRating = $product->rates->average('rating'); // Calcular promedio
+                                @endphp
+                                {{ number_format($averageRating, 1) }} / 5 ({{ $product->rates->count() }} calificaciones)
+                            @else
+                                Sin calificaciones
+                            @endif
+                        </p>
+
+                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
     </div>
 </div>
 <center>

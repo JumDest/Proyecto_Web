@@ -50,6 +50,12 @@ Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->nam
 });
 
 
+Route::get('/rates', [RatesController::class, 'index'])->name('rates.index');
+Route::post('/rates', [RatesController::class, 'store'])->name('rates.store');
+Route::get('/rates/{id}/edit', [RatesController::class, 'edit'])->name('rates.edit');
+Route::put('/rates/{id}', [RatesController::class, 'update'])->name('rates.update');
+Route::delete('/rates/{id}', [RatesController::class, 'destroy'])->name('rates.destroy');
+
 
 
 Route::get('/', [ProductsController::class, 'home'])->name('home');

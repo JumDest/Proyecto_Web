@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category; 
+use App\Models\Rate;
 
 class ProductsController extends Controller
 {
@@ -34,11 +35,11 @@ class ProductsController extends Controller
         // Obtener todas las categorías y marcas para el menú de navegación
         $categories = Category::all();
         $brands = Brand::all();
-        
-        return view('products.product', compact('product', 'similarProducts', 'categories', 'brands'));
-    }
-    
+        $rates = Rate::where('product_id', $id)->get(); // Obtener las calificaciones del producto
 
+        
+        return view('products.product', compact('product', 'similarProducts', 'categories', 'brands', 'rates'));
+    }
 
     public function store(Request $request)
     {
@@ -49,8 +50,8 @@ class ProductsController extends Controller
             'stock' => 'required|integer',
             'specs' => 'required|string',
             'brand_id' => 'required|exists:brands,id',
-            'category_id' => 'required|exists:categories,id', // Validación para la categoría
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validación de imagen
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $product = new Product();
@@ -60,7 +61,7 @@ class ProductsController extends Controller
         $product->stock = $request->stock;
         $product->specs = $request->specs;
         $product->brand_id = $request->brand_id;
-        $product->category_id = $request->category_id; // Asignar categoría
+        $product->category_id = $request->category_id;
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('product_images', 'public');
@@ -75,7 +76,7 @@ class ProductsController extends Controller
     public function create()
     {
         $brands = Brand::all();
-        $categories = Category::all(); // Obtener todas las categorías
+        $categories = Category::all();
         return view('products.gestion_product', compact('brands', 'categories'));
     }
 
@@ -86,7 +87,7 @@ class ProductsController extends Controller
             return redirect()->route('products.index')->with('error', 'Producto no encontrado.');
         }
         $brands = Brand::all();
-        $categories = Category::all(); // Obtener todas las categorías
+        $categories = Category::all();
         return view('products.editar_product', compact('product', 'brands', 'categories'));
     }
 
@@ -99,8 +100,8 @@ class ProductsController extends Controller
             'stock' => 'required|integer',
             'specs' => 'required|string',
             'brand_id' => 'required|exists:brands,id',
-            'category_id' => 'required|exists:categories,id', // Validación para la categoría
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validación de imagen
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $product = Product::find($id);
@@ -114,7 +115,7 @@ class ProductsController extends Controller
         $product->stock = $request->stock;
         $product->specs = $request->specs;
         $product->brand_id = $request->brand_id;
-        $product->category_id = $request->category_id; // Asignar categoría
+        $product->category_id = $request->category_id;
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('product_images', 'public');
@@ -145,34 +146,27 @@ class ProductsController extends Controller
         }
 
         $products = Product::where('brand_id', $brandId)->get();
-        $brands = Brand::all(); // Obtener todas las marcas para el menú desplegable
-        $categories = Category::all(); // Obtener todas las categorías
+        $brands = Brand::all();
+        $categories = Category::all();
 
         return view('products.index', compact('products', 'brands', 'categories'));
     }
 
     public function filterByCategory($id)
-{
-    // Obtiene todos los productos asociados a la categoría
-    $products = Product::where('category_id', $id)->get();
-    // Obtiene todas las marcas y categorías para el menú desplegable
-    $brands = Brand::all();
-    $categories = Category::all();
+    {
+        $products = Product::where('category_id', $id)->get();
+        $brands = Brand::all();
+        $categories = Category::all();
 
-    // Retorna la vista con los productos filtrados
-    return view('products.index', compact('products', 'brands', 'categories'));
+        return view('products.index', compact('products', 'brands', 'categories'));
+    }
+
+    public function home()
+    {
+        $featuredProducts = Product::take(3)->get();
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        return view('principal', compact('featuredProducts', 'categories', 'brands'));
+    }
 }
-public function home()
-{
-    $featuredProducts = Product::take(3)->get();
-    $categories = Category::all();
-    $brands = Brand::all();
-
-    return view('principal', compact('featuredProducts', 'categories', 'brands'));
-}
-
-
-
-}
-
-

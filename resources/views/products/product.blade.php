@@ -75,6 +75,17 @@
 </nav>
     
 <div class="container mt-5">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    
     @if($product)
     <div class="row">
         <div class="col-md-6">
@@ -108,6 +119,60 @@
     </div>
     
     <hr>
+    <!-- Sección de Calificaciones -->
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Calificaciones</h3>
+
+            <!-- Formulario para agregar una nueva calificación -->
+            @auth
+            <div class="mb-3">
+                <form action="{{ route('rates.store') }}" method="POST">
+                    @csrf
+
+                    <label for="score">Calificación:</label>
+                    <div class="rating">
+                        <input type="radio" name="score" value="5" id="star5" />
+                        <label for="star5" class="star">&#9733;</label>
+                        <input type="radio" name="score" value="4" id="star4" />
+                        <label for="star4" class="star">&#9733;</label>
+                        <input type="radio" name="score" value="3" id="star3" />
+                        <label for="star3" class="star">&#9733;</label>
+                        <input type="radio" name="score" value="2" id="star2" />
+                        <label for="star2" class="star">&#9733;</label>
+                        <input type="radio" name="score" value="1" id="star1" />
+                        <label for="star1" class="star">&#9733;</label>
+                    </div>
+
+                    <label for="comment">Comentario:</label>
+                    <textarea name="comment" class="form-control" rows="3"></textarea>
+
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+
+                    <button type="submit" class="btn btn-primary mt-3">Enviar Calificación</button>
+                </form>
+            </div>
+            @endauth
+
+            <!-- Mostrar calificaciones existentes -->
+            @if($rates->count())
+                <ul class="list-group">
+                    @foreach($rates as $rate)
+                        <li class="list-group-item">
+                            <strong>Calificación: {{ $rate->score }}</strong>
+                            <p>{{ $rate->comment }}</p>
+                            <small class="text-muted">Por: {{ $rate->user->name ?? 'Usuario Anónimo' }}</small>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p>No hay calificaciones para este producto.</p>
+            @endif
+        </div>
+    </div>
+
+    <hr>
     <!-- Productos Similares -->
     <h3>Productos Similares</h3>
     <div class="row">
@@ -128,18 +193,9 @@
         </div>
         @endforeach
     </div>
-    @else
-    <p>Producto no encontrado.</p>
     @endif
 </div>
 
-<!-- JavaScript para manejar el botón de compra -->
-<script>
-    document.getElementById('buyButton').addEventListener('click', function() {
-        alert('Pedido realizado con éxito');
-    });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-7H1hh8CkB3EsHdQ8cnC0f5P+cO0kV20oF8sy4hMLuoDl9fHgMvNP6xOlW6T2N40" crossorigin="anonymous"></script>
 </body>
 </html>
