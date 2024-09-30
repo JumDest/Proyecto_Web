@@ -32,7 +32,6 @@ class OrderDetailsController extends Controller
         return view('orderDetails.edit');
     }
 
- 
     public function update(Request $request, string $id)
     {
         $orderDetail = OrderDetail::find($id);

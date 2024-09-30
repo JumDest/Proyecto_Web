@@ -14,7 +14,6 @@ class OrdersController extends Controller
         return view('orders.index', compact('orders'));
     }
 
- 
     
     public function store(Request $request)
     {

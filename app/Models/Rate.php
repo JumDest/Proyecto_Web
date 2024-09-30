@@ -9,7 +9,7 @@ class Rate extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['score', 'product_id', 'user_id']; // Cambia 'rating' a 'score'
+    protected $fillable = ['score', 'product_id', 'user_id']; 
     
     public function user()
     {

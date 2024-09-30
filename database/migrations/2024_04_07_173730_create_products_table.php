@@ -9,7 +9,6 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    // Migración de Products
 public function up(): void
 {
     Schema::create('products', function (Blueprint $table) {
@@ -23,7 +22,7 @@ public function up(): void
         $table->foreign('brand_id')->references('id')->on('brands');
         $table->unsignedBigInteger('category_id')->comment('Categoria');
         $table->foreign('category_id')->references('id')->on('categories');
-        $table->string('image_url')->comment('URL de la imagen del producto'); // Nueva columna
+        $table->string('image_url')->comment('URL de la imagen del producto');
         $table->timestamps();
     });
 }

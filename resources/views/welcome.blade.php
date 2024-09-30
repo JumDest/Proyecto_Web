@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>JD Components</title>
+		<link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/jpeg">
 		<link rel="stylesheet" href="/css/styles.css">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js desde CDN -->
@@ -120,10 +121,8 @@
         <section>
             <h2>Generar reporte de portátiles por marca</h2>
 
-            <!-- Botón para generar el reporte en PDF -->
             <button id="boton-portatiles" class="btn btn-primary">Generar PDF</button>
 
-            <!-- Canvas para el gráfico -->
             <canvas id="graficoPortatiles" width="400" height="200"></canvas>
         </section>
 

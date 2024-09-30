@@ -7,7 +7,6 @@ use App\Models\UserClientsDetails;
 
 class UserClientsDetailsController extends Controller
 {
-   
     public function index()
     {
         $userClientsDetails = UserClientsDetails::all();
@@ -32,7 +31,6 @@ class UserClientsDetailsController extends Controller
         return view('userClientsDetails.edit');
     }
 
-   
     public function update(Request $request, string $id)
     {
         $userClientsDetails = UserClientsDetails::find($id);
@@ -44,7 +42,6 @@ class UserClientsDetailsController extends Controller
         return redirect()->route('userClientsDetails.index');
     }
 
-   
     public function destroy(string $id)
     {
         $userClientsDetails = UserClientsDetails::find($id);

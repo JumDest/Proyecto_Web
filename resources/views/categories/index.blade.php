@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Categorías</title>
+    <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/jpeg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 </head>
@@ -51,7 +52,6 @@
     <div class="container mt-5">
         <h1 class="mb-4">Gestionar Categorías</h1>
 
-        <!-- Formulario para agregar una nueva categoría -->
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">Agregar Nueva Categoría</h5>
@@ -66,7 +66,6 @@
             </div>
         </div>
 
-        <!-- Lista de categorías existentes -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Categorías Existentes</h5>

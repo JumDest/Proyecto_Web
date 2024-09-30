@@ -11,8 +11,8 @@ class BrandsController extends Controller
     
     public function index()
     {
-        $brands = Brand::all(); // Obtener todas las marcas
-        $products = Product::all(); // Obtener todos los productos
+        $brands = Brand::all(); 
+        $products = Product::all(); 
         return view('brands.index', compact('products', 'brands'));
     }
 
@@ -30,7 +30,7 @@ class BrandsController extends Controller
     {
         return view('brands.gestion_brand');
     }
-   
+    
     public function edit(string $id)
     {
         $brand = Brand::findOrFail($id);

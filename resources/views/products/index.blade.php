@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Productos</title>
+    <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/jpeg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.6.0/dist/jspdf.umd.min.js"></script>
@@ -27,7 +28,6 @@
                     <a class="nav-link" href="#">Productos</a>
                 </li>
 
-                <!-- Menú desplegable de Categorías -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categorías
@@ -39,7 +39,6 @@
                     </ul>
                 </li>
 
-                <!-- Menú desplegable de Marcas -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Marcas
@@ -75,7 +74,6 @@
     </div>
 </nav>
 
-<!-- Vista de productos -->
 <div class="container mt-5">
     <h1>Lista de Productos</h1>
     <div class="row">
@@ -88,13 +86,12 @@
                         <p class="card-text">{{ $product->description }}</p>
                         <p class="card-text"><strong>Precio:</strong> ${{ number_format($product->price, 2) }}</p>
 
-                        <!-- Mostrar calificaciones -->
                         <p class="card-text"><strong>Calificaciones:</strong>
                             @if($product->rates->count() > 0)
                                 @php
-                                    $averageRating = $product->rates->average('rating'); // Calcular promedio
+                                    $averageScore = $product->rates->average('score'); // Calcular promedio
                                 @endphp
-                                {{ number_format($averageRating, 1) }} / 5 ({{ $product->rates->count() }} calificaciones)
+                                {{ number_format($averageScore, 1) }} / 5 ({{ $product->rates->count() }} calificaciones)
                             @else
                                 Sin calificaciones
                             @endif

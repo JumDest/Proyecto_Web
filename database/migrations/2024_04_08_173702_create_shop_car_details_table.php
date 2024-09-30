@@ -14,7 +14,6 @@ class CreateShopCarDetailsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->integer('quantityShopCar')->default(1);
             $table->timestamps();
-
             $table->foreign('shop_car_id')->references('id')->on('shop_cars')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });

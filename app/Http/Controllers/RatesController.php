@@ -29,7 +29,6 @@ class RatesController extends Controller
         $rate->user_id = $request->user_id;
         $rate->save();
     
-        // Redirigir a la página anterior
         return back()->with('success', 'Calificación creada con éxito.');
     }
     

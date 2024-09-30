@@ -32,10 +32,9 @@ class ProductsController extends Controller
                                     ->take(4) // Limitar la cantidad de productos similares
                                     ->get();
         
-        // Obtener todas las categorías y marcas para el menú de navegación
         $categories = Category::all();
         $brands = Brand::all();
-        $rates = Rate::where('product_id', $id)->get(); // Obtener las calificaciones del producto
+        $rates = Rate::where('product_id', $id)->get(); 
 
         
         return view('products.product', compact('product', 'similarProducts', 'categories', 'brands', 'rates'));

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JD Components</title>
+    <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/jpeg">
     <link rel="stylesheet" href="/css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 </head>
 <body>
 
-    <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="/">JD Components</a>
@@ -26,7 +26,6 @@
                         <a class="nav-link" href="/products">Productos</a>
                     </li>
 
-                    <!-- Menú desplegable de Categorías -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Categorías
@@ -38,7 +37,6 @@
                         </ul>
                     </li>
 
-                    <!-- Menú desplegable de Marcas -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Marcas
@@ -74,7 +72,6 @@
         </div>
     </nav>
 
-    <!-- Encabezado -->
     <header class="header">
         <div class="container">
             <h1>Bienvenidos JD Components</h1>
@@ -82,7 +79,6 @@
         </div>
     </header>
 
-    <!-- Productos Destacados -->
     <section class="products py-5">
         <div class="container">
             <h2 class="text-center mb-4">Productos Destacados</h2>
@@ -108,7 +104,6 @@
         </div>
     </section>
 
-    <!-- Formulario de Contacto -->
     <section class="contact py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-4">Contacto</h2>
@@ -130,7 +125,6 @@
         </div>
     </section>
 
-    <!-- Pie de Página -->
     <footer class="text-center py-4">
         <div class="container">
             <p>&copy; 2024 JD Components. Todos los derechos reservados ©.</p>

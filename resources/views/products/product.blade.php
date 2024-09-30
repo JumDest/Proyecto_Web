@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $product->name ?? 'Producto' }}</title>
+    <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/jpeg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 </head>
 <body>
     
-<!-- Barra de Navegación -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">JD Components</a>
@@ -25,7 +26,6 @@
                     <a class="nav-link" href="/products">Productos</a>
                 </li>
 
-                <!-- Menú desplegable de Categorías -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categorías
@@ -37,7 +37,6 @@
                     </ul>
                 </li>
 
-                <!-- Menú desplegable de Marcas -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Marcas
@@ -89,7 +88,6 @@
     @if($product)
     <div class="row">
         <div class="col-md-6">
-            <!-- Product Image -->
             @if($product->image_url)
                 <img src="{{ asset('storage/' . $product->image_url) }}" class="img-fluid" alt="{{ $product->name }}">
             @else
@@ -98,7 +96,6 @@
         </div>
         
         <div class="col-md-6">
-            <!-- Product Details -->
             <h1>{{ $product->name }}</h1>
             <p class="text-muted">{{ $product->category->name ?? 'Categoría no disponible' }}</p>
             <h2>${{ $product->price }}</h2>
@@ -108,7 +105,6 @@
     <hr>
     <div class="row">
         <div class="col-md-12">
-            <!-- Product Specifications -->
             <h3>Especificaciones del Producto</h3>
             <ul>
                 @foreach(explode("\n", $product->specs) as $spec)
@@ -119,12 +115,10 @@
     </div>
     
     <hr>
-    <!-- Sección de Calificaciones -->
     <div class="row">
         <div class="col-md-12">
             <h3>Calificaciones</h3>
 
-            <!-- Formulario para agregar una nueva calificación -->
             @auth
             <div class="mb-3">
                 <form action="{{ route('rates.store') }}" method="POST">
@@ -155,7 +149,6 @@
             </div>
             @endauth
 
-            <!-- Mostrar calificaciones existentes -->
             @if($rates->count())
                 <ul class="list-group">
                     @foreach($rates as $rate)
@@ -173,7 +166,6 @@
     </div>
 
     <hr>
-    <!-- Productos Similares -->
     <h3>Productos Similares</h3>
     <div class="row">
         @foreach($similarProducts as $similarProduct)
