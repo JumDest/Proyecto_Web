@@ -1,3 +1,10 @@
+- Clona el repositorio desde GitHub.
+- Instala las dependencias con composer update.
+- Configura el entorno en el archivo .env creando la base de datos en Laragon y poniendo el nombre en el .env.
+- Genera la clave de la aplicación usando el comando php artisan key:generate.
+- Realiza las migraciones necesarias, en este caso correremos el comando php artisan migrate --seed.
+- Dale inicio a la aplicación con php artisan server.
+
 Para correr los seeders con las imagenes se debe correr el siguiente comando:
 "php artisan storage:link"
 
