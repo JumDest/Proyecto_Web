@@ -23,7 +23,7 @@
                         <a class="nav-link active" aria-current="page" href="/">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/products">Productos</a>
+                        <a class="nav-link" href="{{ route('products.index') }}">Productos</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -31,6 +31,13 @@
                             Categorías
                         </a>
                         <ul class="dropdown-menu">
+                            <li>
+                                @auth
+                                    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('support_Team')) <!-- Verifica si el usuario tiene el rol de administrador o soporte -->
+                                        <a href="{{ route('categories.index') }}" class="dropdown-item">Gestionar</a>
+                                    @endif
+                                @endauth
+                            </li>
                             @foreach ($categories as $category)
                                 <li><a class="dropdown-item" href="{{ route('products.byCategory', $category->id) }}">{{ $category->name }}</a></li>
                             @endforeach
@@ -42,6 +49,13 @@
                             Marcas
                         </a>
                         <ul class="dropdown-menu">
+                            <li>
+                                @auth
+                                    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('support_Team')) <!-- Verifica si el usuario tiene el rol de administrador o soporte -->
+                                        <a href="{{ route('brands.index') }}" class="dropdown-item">Gestionar</a>
+                                    @endif
+                                @endauth
+                            </li>
                             @foreach ($brands as $brand)
                                 <li><a class="dropdown-item" href="{{ route('products.byBrand', $brand->id) }}">{{ $brand->name }}</a></li>
                             @endforeach
@@ -53,20 +67,25 @@
                     </li>
 
                     @auth
-                    <li class="nav-item dropdown d-flex align-items-center">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ asset('img/avatar.png') }}" alt="Avatar" class="user-avatar">
-                            <span>{{ Auth::user()->name }}</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesión</a></li>
-                        </ul>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
-                    </li>
-                @endauth
+                        <li class="nav-item dropdown d-flex align-items-center">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('img/avatar.png') }}" alt="Avatar" class="user-avatar">
+                                <span>{{ Auth::user()->name }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                                <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Cerrar sesión
+                                </a>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -96,6 +115,11 @@
                             <p class="card-text">{{ $product->description }}</p>
                             <p class="card-text"><strong>Precio:</strong> ${{ $product->price }}</p>
                             <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver</a>
+                            @auth
+                                @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('support_Team'))
+                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary">Editar</a>
+                                @endif
+                            @endauth
                         </div>
                     </div>
                 </div>

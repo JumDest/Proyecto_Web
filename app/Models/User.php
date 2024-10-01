@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    
+
     use HasRoles;
 
     public function hasRole($roleName)
@@ -22,7 +22,13 @@ class User extends Authenticatable
 
     public function role(){
         return $this->belongsTo(Role::class);
+
     }
+    public function hasAnyRole($roles)
+    {
+        return $this->roles()->whereIn('name', explode('|', $roles))->exists();
+    }
+
 
     /**
      * The attributes that are mass assignable.

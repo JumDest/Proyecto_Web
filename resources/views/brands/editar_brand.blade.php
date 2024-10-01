@@ -35,8 +35,13 @@
                                 <span class="me-2">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesión</a></li>
-                            </ul>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Cerrar sesión
+                            </a>
+                        </ul>
                         </li>
                     @else
                         <li class="nav-item">
@@ -51,7 +56,7 @@
         <h1 class="mb-4">Editar Marca</h1>
         <form action="{{ route('brands.update', $brand->id) }}" method="POST">
             @csrf
-            @method('PUT') 
+            @method('PUT')
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $brand->name) }}" required>

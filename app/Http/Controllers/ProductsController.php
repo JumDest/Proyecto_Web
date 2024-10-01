@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Brand;
-use App\Models\Category; 
+use App\Models\Category;
 use App\Models\Rate;
 
 class ProductsController extends Controller
@@ -13,30 +13,31 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::all();
-        $brands = Brand::all(); 
-        $categories = Category::all(); 
+        $brands = Brand::all();
+        $categories = Category::all();
         return view('products.index', compact('products', 'brands', 'categories'));
     }
+
 
     public function show(string $id)
     {
         $product = Product::find($id);
-        
+
         if (!$product) {
             return redirect()->route('products.index')->with('error', 'Producto no encontrado.');
         }
-        
+
         // Obtener productos similares de la misma categoría
         $similarProducts = Product::where('category_id', $product->category_id)
                                     ->where('id', '!=', $id) // Excluir el producto actual
                                     ->take(4) // Limitar la cantidad de productos similares
                                     ->get();
-        
+
         $categories = Category::all();
         $brands = Brand::all();
-        $rates = Rate::where('product_id', $id)->get(); 
+        $rates = Rate::where('product_id', $id)->get();
 
-        
+
         return view('products.product', compact('product', 'similarProducts', 'categories', 'brands', 'rates'));
     }
 
@@ -78,6 +79,7 @@ class ProductsController extends Controller
         $categories = Category::all();
         return view('products.gestion_product', compact('brands', 'categories'));
     }
+
 
     public function edit(string $id)
     {

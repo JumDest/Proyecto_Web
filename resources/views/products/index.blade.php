@@ -33,6 +33,13 @@
                         Categorías
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            @auth
+                                @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('support_Team')) <!-- Verifica si el usuario tiene el rol de administrador o soporte -->
+                                    <a href="{{ route('categories.index') }}" class="dropdown-item">Gestionar</a>
+                                @endif
+                            @endauth
+                        </li>
                         @foreach ($categories as $category)
                             <li><a class="dropdown-item" href="{{ route('products.byCategory', $category->id) }}">{{ $category->name }}</a></li>
                         @endforeach
@@ -44,6 +51,13 @@
                         Marcas
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            @auth
+                                @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('support_Team')) <!-- Verifica si el usuario tiene el rol de administrador o soporte -->
+                                    <a href="{{ route('brands.index') }}" class="dropdown-item">Gestionar</a>
+                                @endif
+                            @endauth
+                        </li>
                         @foreach ($brands as $brand)
                             <li><a class="dropdown-item" href="{{ route('products.byBrand', $brand->id) }}">{{ $brand->name }}</a></li>
                         @endforeach
@@ -61,7 +75,12 @@
                             <span>{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesión</a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Cerrar sesión
+                            </a>
                         </ul>
                     </li>
                 @else
@@ -73,6 +92,13 @@
         </div>
     </div>
 </nav>
+@auth
+    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('support_Team')) <!-- Verifica si el usuario tiene el rol de administrador o soporte -->
+        <div class="text-center mt-4">
+            <a href="{{ route('products.create') }}" class="btn btn-primary">Gestionar Producto</a>
+        </div>
+    @endif
+@endauth
 
 <div class="container mt-5">
     <h1>Lista de Productos</h1>
@@ -98,21 +124,31 @@
                         </p>
 
                         <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver</a>
+                        @auth
+                            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('support_Team'))
+                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary">Editar</a>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
 </div>
-<center>
-    <div class="column">
-        <h1>Generar archivo PDF y Contar Portátiles HP </h1><br>
-        <button class='btn btn-primary' onclick="window.location.href='{{ route('reporte.generate') }}'">PDF Productos</button>
-        <button class='btn btn-primary' id="generateReport">Contar Portátiles HP</button>
-        <p id="hpCount"></p>
-        <canvas id="productChart" width="400" height="200"></canvas>
-    </div>
-</center>
+@auth
+    @if (Auth::user()->hasRole('admin')) <!-- Verifica si el usuario tiene el rol de administrador -->
+        <center>
+            <div class="column">
+                <h1>Generar archivo PDF y Contar Portátiles HP</h1><br>
+                <button class='btn btn-primary' onclick="window.location.href='{{ route('reporte.generate') }}'">PDF Productos</button>
+                <button class='btn btn-primary' id="generateReport">Contar Portátiles HP</button>
+                <p id="hpCount"></p>
+                <canvas id="productChart" width="400" height="200"></canvas>
+            </div>
+        </center>
+    @endif
+@endauth
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

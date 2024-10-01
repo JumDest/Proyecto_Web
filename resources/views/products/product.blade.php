@@ -9,21 +9,19 @@
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 </head>
 <body>
-    
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">JD Components</a>
+        <a class="navbar-brand" href="/">JD Components</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/products">Productos</a>
+                    <a class="nav-link" href="{{ route('products.index') }}">Productos</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -31,6 +29,13 @@
                         Categorías
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            @auth
+                                @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('support_Team')) <!-- Verifica si el usuario tiene el rol de administrador o soporte -->
+                                    <a href="{{ route('categories.index') }}" class="dropdown-item">Gestionar</a>
+                                @endif
+                            @endauth
+                        </li>
                         @foreach ($categories as $category)
                             <li><a class="dropdown-item" href="{{ route('products.byCategory', $category->id) }}">{{ $category->name }}</a></li>
                         @endforeach
@@ -42,6 +47,13 @@
                         Marcas
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            @auth
+                                @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('support_Team')) <!-- Verifica si el usuario tiene el rol de administrador o soporte -->
+                                    <a href="{{ route('brands.index') }}" class="dropdown-item">Gestionar</a>
+                                @endif
+                            @endauth
+                        </li>
                         @foreach ($brands as $brand)
                             <li><a class="dropdown-item" href="{{ route('products.byBrand', $brand->id) }}">{{ $brand->name }}</a></li>
                         @endforeach
@@ -59,7 +71,12 @@
                             <span>{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesión</a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Cerrar sesión
+                            </a>
                         </ul>
                     </li>
                 @else
@@ -67,12 +84,11 @@
                         <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
                     </li>
                 @endauth
-
             </ul>
         </div>
     </div>
 </nav>
-    
+
 <div class="container mt-5">
     @if(session('success'))
         <div class="alert alert-success">
@@ -84,7 +100,7 @@
             {{ session('error') }}
         </div>
     @endif
-    
+
     @if($product)
     <div class="row">
         <div class="col-md-6">
@@ -94,12 +110,12 @@
                 <img src="https://via.placeholder.com/500x500" class="img-fluid" alt="{{ $product->name }}">
             @endif
         </div>
-        
+
         <div class="col-md-6">
             <h1>{{ $product->name }}</h1>
             <p class="text-muted">{{ $product->category->name ?? 'Categoría no disponible' }}</p>
             <h2>${{ $product->price }}</h2>
-            <button id="buyButton" class="btn btn-primary">Comprar</button>  
+            <button id="buyButton" class="btn btn-primary">Comprar</button>
         </div>
     </div>
     <hr>
@@ -113,7 +129,7 @@
             </ul>
         </div>
     </div>
-    
+
     <hr>
     <div class="row">
         <div class="col-md-12">
@@ -188,6 +204,6 @@
     @endif
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-7H1hh8CkB3EsHdQ8cnC0f5P+cO0kV20oF8sy4hMLuoDl9fHgMvNP6xOlW6T2N40" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
